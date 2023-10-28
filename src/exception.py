@@ -38,11 +38,11 @@ class CustomException(Exception):
         return self.error_message
 
 
-if __name__ == "__main__":
-    try:
-        a = 10/0
-    except Exception as e:
-        logging.info(f"Division by Zero Error")
-        raise CustomException(error_message=e, error_detail=sys)
+# if __name__ == "__main__":
+#     try:
+#         a = 10/0
+#     except Exception as e:
+#         logging.info(f"Division by Zero Error")
+#         raise CustomException(error_message=e, error_detail=sys)
 
 
