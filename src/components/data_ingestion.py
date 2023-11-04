@@ -1,5 +1,6 @@
 import os
 import sys
+
 from src.exception import CustomException
 from src.logger import logging
 import pandas as pd
@@ -13,9 +14,9 @@ class DataIngestionConfig:
     """
     This is the dataclass for DataIngestionConfig
     """
-    train_data_path: str = os.path.join("artifact", "train.csv")
-    test_data_path: str = os.path.join("artifact", "test.csv")
-    raw_data_path: str = os.path.join("artifact", "raw_data.csv")
+    train_data_path: str = os.path.join("artifacts", "train.csv")
+    test_data_path: str = os.path.join("artifacts", "test.csv")
+    raw_data_path: str = os.path.join("artifacts", "raw_data.csv")
 
 
 class DataIngestion:
@@ -47,3 +48,12 @@ class DataIngestion:
             raise CustomException(error_message=ce, error_detail=sys)
 
         return self.data_ingestion_config.train_data_path, self.data_ingestion_config.test_data_path
+
+
+if __name__ == "__main__":
+    from src.components.data_transformation import DataTransformation
+    obj = DataIngestion()
+    train_data, test_data = obj.initiate_data_ingestion()
+
+    data_transformation = DataTransformation()
+    data_transformation.initiate_data_transformation(train_data_path=train_data, test_data_path=test_data)
