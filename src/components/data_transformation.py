@@ -74,7 +74,6 @@ class DataTransformation:
             logging.info(f"Fetching preprocessor object")
             preprocessor = self.get_data_transformer_obj()
             target_feature = "math_score"
-            numerical_features = ["writing_score", "reading_score"]
 
             input_feature_train_df = train_df.drop(target_feature, axis=1)
             target_feature_train_df = train_df[target_feature]
@@ -96,6 +95,7 @@ class DataTransformation:
 
         except Exception as ce:
             raise CustomException(error_message=ce, error_detail=sys)
+
 
 if __name__ == "__main__":
     obj = DataIngestion()

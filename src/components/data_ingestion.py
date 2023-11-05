@@ -50,10 +50,15 @@ class DataIngestion:
         return self.data_ingestion_config.train_data_path, self.data_ingestion_config.test_data_path
 
 
-if __name__ == "__main__":
-    from src.components.data_transformation import DataTransformation
-    obj = DataIngestion()
-    train_data, test_data = obj.initiate_data_ingestion()
-
-    data_transformation = DataTransformation()
-    data_transformation.initiate_data_transformation(train_data_path=train_data, test_data_path=test_data)
+# if __name__ == "__main__":
+#     from src.components.data_transformation import DataTransformation
+#     from src.components.model_trainer import ModelTrainerConfig
+#     from src.components.model_trainer import ModelTrainer
+#     obj = DataIngestion()
+#     train_data, test_data = obj.initiate_data_ingestion()
+#
+#     data_transformation = DataTransformation()
+#     train_array, test_array, _ = data_transformation.initiate_data_transformation(train_data_path=train_data, test_data_path=test_data)
+#
+#     model_trainer = ModelTrainer()
+#     print(model_trainer.initiate_model_trainer(train_array=train_array, test_array=test_array))
