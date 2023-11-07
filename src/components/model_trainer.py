@@ -41,10 +41,9 @@ class ModelTrainer:
                 "Decision Tree": DecisionTreeRegressor(),
                 "Gradient Boosting": GradientBoostingRegressor(),
                 "Linear Regression": LinearRegression(),
-                "KNN": KNeighborsRegressor(),
                 "AdaBoost Regressor": AdaBoostRegressor(),
                 "XGBRegressor": XGBRegressor(),
-                "CatBoost Regressor": CatBoostRegressor(verbose=False)
+                "CatBoosting Regressor": CatBoostRegressor(verbose=False)
             }
 
             # Hyperparameters for the models
