@@ -6,7 +6,6 @@ from catboost import CatBoostRegressor
 
 from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, AdaBoostRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.neighbors import KNeighborsRegressor
 from sklearn.metrics import r2_score
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
