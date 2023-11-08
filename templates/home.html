@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Performance Indicator</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .login {
+            margin: auto;
+            width: 500px;
+            /*border: 1px solid #ccc;*/
+            padding: 20px;
+        }
+
+        .mb-3 {
+            margin-bottom: 15px;
+
+        }
+
+        .btn-primary{
+            width: 100%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Dark Mode CSS */
+        body.dark-mode {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .login.dark-mode {
+            border: 1px solid #666;
+        }
+
+        .form-control.dark-mode {
+            border: 1px solid #666;
+        }
+
+        /* Toggle Button Styling */
+        .toggle-container {
+            /*display: flex;*/
+            /*justify-content: flex-end;*/
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            margin: 20px;
+        }
+
+        .toggle-checkbox {
+            position: sticky;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+        }
+
+        .toggle-checkbox input {
+            display: none;
+        }
+
+        .slider {
+            position: sticky;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            transition: 0.4s;
+            border-radius: 20px;
+        }
+
+        .icon {
+            display: inline-block;
+            font-size: 20px;
+            line-height: 20px;
+            transition: 0.4s;
+            position: absolute;
+        }
+
+        .icon.sun {
+            left: 2px;
+            opacity: 1;
+        }
+
+        .icon.moon {
+            right: 2px;
+            opacity: 0;
+        }
+
+        input:checked + .slider {
+            background-color: #1a1a1a;
+        }
+
+        input:checked + .slider .icon.sun {
+            left: -20px;
+            opacity: 0;
+        }
+
+        input:checked + .slider .icon.moon {
+            right: -20px;
+            opacity: 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="toggle-container">
+    <label class="toggle-checkbox">
+        <input type="checkbox" id="dark-mode-toggle">
+        <span class="slider">
+            <span class="icon sun">☀️</span>
+            <span class="icon moon">🌙</span>
+        </span>
+    </label>
+</div>
+    <h1>Math Exam Performance Indicator</h1>
+    <div class="login">
+        <form action="{{ url_for('predict_datapoint')}}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-control" name="gender" placeholder="Enter you Gender" required>
+                    <option class="placeholder" selected disabled value="">Select your Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Race or Ethnicity</label>
+                <select class="form-control" name="ethnicity" placeholder="Enter you ethnicity" required>
+                    <option class="placeholder" selected disabled value="">Select Ethnicity</option>
+                    <option value="group_a">Group A</option>
+                    <option value="group_b">Group B</option>
+                    <option value="group_c">Group C</option>
+                    <option value="group_d">Group D</option>
+                    <option value="group_e">Group E</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Parental Level of Education</label>
+                <select class="form-control" name="parental_level_of_education"
+                        placeholder="Enter you Parent Education" required>
+                    <option class="placeholder" selected disabled value="">Select Parent Education</option>
+                    <option value="associate's_degree">Associate's Degree</option>
+                    <option value="bachelor's_degree">Bachelor's Degree</option>
+                    <option value="high_school">High School</option>
+                    <option value="master's_degree">Master's Degree</option>
+                    <option value="some_college">Some College</option>
+                    <option value="some_high_school">Some High School</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Lunch Type</label>
+                <select class="form-control" name="lunch" placeholder="Enter you Lunch" required>
+                    <option class="placeholder" selected disabled value="">Select Lunch Type</option>
+                    <option value="free/reduced">Free/Reduced</option>
+                    <option value="standard">Standard</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Test Preparation Course</label>
+                <select class="form-control" name="test_preparation_course" placeholder="Enter you Course"
+                        required>
+                    <option class="placeholder" selected disabled value="">Select Test_course</option>
+                    <option value="none">None</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Writing Score out of 100</label>
+                <input class="form-control" type="number" name="writing_score"
+                       placeholder="Enter your Writing score" min="0" max="100" />
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Predict" required />
+            </div>
+        </form>
+
+        <h2>
+            Prediction score: {{results}}
+        </h2>
+    </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        });
+
+        const sunIcon = document.querySelector('.icon.sun');
+        const moonIcon = document.querySelector('.icon.moon');
+
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                sunIcon.style.opacity = 0;
+                moonIcon.style.opacity = 1;
+            } else {
+                sunIcon.style.opacity = 1;
+                moonIcon.style.opacity = 0;
+            }
+        });
+
+    </script>
+</body>
+</html>

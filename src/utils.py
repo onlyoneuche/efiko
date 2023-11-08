@@ -32,3 +32,12 @@ def evaluate_models(models, X_train, y_train, X_test, y_test, params):
 
         model_report[model_name] = test_score
     return model_report
+
+
+def load_obj(file_path):
+    try:
+        with open(file_path, "rb") as f:
+            obj = dill.load(f)
+        return obj
+    except Exception as ce:
+        raise CustomException(error_message=ce, error_detail=sys)
