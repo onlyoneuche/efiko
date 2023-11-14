@@ -142,7 +142,7 @@
 </div>
     <h1>Math Exam Performance Indicator</h1>
     <div class="login">
-        <form action="{{ url_for('predict_datapoint')}}" method="post">
+        <form action="{{ url_for('predict')}}" method="post">
             <div class="mb-3">
                 <label class="form-label">Gender</label>
                 <select class="form-control" name="gender" placeholder="Enter you Gender" required>
@@ -200,6 +200,11 @@
                 <label class="form-label">Writing Score out of 100</label>
                 <input class="form-control" type="number" name="writing_score"
                        placeholder="Enter your Writing score" min="0" max="100" />
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Reading Score out of 100</label>
+                <input class="form-control" type="number" name="reading_score" placeholder="Enter your Reading score" min="0"
+                    max="100" />
             </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Predict" required />
