@@ -60,6 +60,6 @@ The objective of this project is to predict the math score of a student based on
 - Clone the repository
 - Create a virtual environment
 - Install the dependencies
-- Run the application.py file
+- Run the `application.py` file
 - Open the localhost link in the browser
 - Enter the values in the form and click on the predict button to get the predicted math score.
