@@ -1,5 +1,3 @@
-# efiko
-
 ## Dataset Description:
 The aim of the dataset is to understand the influence of various factors like economic, personal and social on a student's performance.
 
