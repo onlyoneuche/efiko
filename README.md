@@ -39,7 +39,7 @@ The objective of this project is to predict the math score of a student based on
 ### Model Training
 
 - Evaluate the performance of base models.
-- Identify the best performing model (CatBoostRegressor).
+- Identify the best performing model
 - Perform hyperparameter tuning
 - Save the result as a pickle file.
 
